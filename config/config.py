@@ -7,7 +7,7 @@ class Config:
     # 数据库配置
     BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(BASE_DIR, 'db_tool.db')
+        'oracle+cx_oracle://system:12345678@localhost:1531/PRICDB'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # JWT配置
@@ -40,6 +40,7 @@ class ProductionConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    # 测试环境仍使用内存SQLite数据库，便于快速测试
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
 
 config = {
